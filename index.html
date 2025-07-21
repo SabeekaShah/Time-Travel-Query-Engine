@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Travel Query Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js for Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensure the container is properly centered and fits the content */
+        #content {
+            max-width: 1200px; /* Max width for content */
+            margin: 0 auto; /* Center the content horizontally */
+        }
+
+        /* Full width for the canvas */
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        /* Adjust margin and padding for elements */
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        /* Tailwind max-width for chart to keep it responsive */
+        .max-w-3xl {
+            max-width: 100%;
+        }
+
+        /* Custom Navbar and Button Styling */
+        #navbar a {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        #navbar a:hover {
+            background-color: #4a4a4a;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 text-white p-4" id="navbar">
+        <div class="flex justify-between items-center">
+            <div class="text-xl font-semibold">
+                <a href="#" id="homeLink">Time Travel Query Engine</a>
+            </div>
+            <div class="space-x-6">
+                <button id="dataSource" class="hover:bg-gray-700 px-4 py-2 rounded">Data Source</button>
+                <button id="descriptions" class="hover:bg-gray-700 px-4 py-2 rounded">Descriptions</button>
+                <button id="favourites" class="hover:bg-gray-700 px-4 py-2 rounded">Favourites</button>
+                <button id="about" class="hover:bg-gray-700 px-4 py-2 rounded">About</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div id="content" class="p-8 transition-all duration-300">
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-center text-blue-700">Time Travel Query Engine</h1>
+        
+        <!-- Filter Section -->
+        <div class="flex flex-wrap gap-4 mb-4 bg-white p-4 rounded-lg shadow-md justify-center">
+            <input type="date" id="start_date" class="p-2 border rounded">
+            <input type="date" id="end_date" class="p-2 border rounded">
+            <select id="country" class="p-2 border rounded">
+                <option value="">All Countries</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="China">China</option>
+                <option value="Russia">Russia</option>
+                <option value="UK">UK</option>
+                <option value="Iran">Iran</option>
+                <option value="Afghanistan">Afghanistan</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+            </select>
+            
+            <select id="category" class="p-2 border rounded">
+                <option value="">All Categories</option>
+            </select>
+
+            <button id="searchBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Search
+            </button>
+            <button id="realTimeBtn" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                Real-Time Data
+            </button>
+        </div>
+
+        <!-- Chart Type Selection -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-4">
+            <label for="chartType" class="font-semibold">Chart Type:</label>
+            <select id="chartType" class="p-2 border rounded">
+                <option value="line">Line Chart</option>
+                <option value="bar">Bar Chart</option>
+                <option value="pie">Pie Chart</option>
+            </select>
+        </div>
+
+        <!-- Chart Display -->
+        <div class="w-full max-w-3xl bg-white p-4 rounded-lg shadow-md mx-auto">
+            <canvas id="chart"></canvas>
+        </div>
+
+       
+
+        <!-- Event Display -->
+        <div id="eventDisplay" class="mt-4 text-lg font-semibold text-gray-700 hidden">
+            Click on a point to view event details.
+        </div>
+         <!-- Prediction Display -->
+         
+         <div id="predictionDisplay" class="mt-4 p-3 bg-gray-200 text-lg font-semibold text-gray-700 rounded-lg shadow-md">
+            <strong>Latest Prediction:</strong>Yet to implement 
+        </div> 
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Navbar button actions
+        const contentDiv = document.getElementById('content');
+        
+        document.getElementById('dataSource').addEventListener('click', function() {
+    contentDiv.innerHTML = `
+        <h1 class="text-3xl font-bold mb-4">Data Sources</h1>
+        <ul class="list-disc pl-8 space-y-2 text-blue-600">
+            <li><a href="https://www.cfr.org/global-conflict-tracker" target="_blank" class="hover:underline">Global Conflict Tracker</a></li>
+            <li><a href="https://www.worldbank.org" target="_blank" class="hover:underline">World Bank</a></li>
+            <li><a href="https://www.un.org" target="_blank" class="hover:underline">United Nations</a></li>
+            <li><a href="https://www.nationalgeographic.com" target="_blank" class="hover:underline">National Geographic</a></li>
+            <li><a href="https://www.who.int" target="_blank" class="hover:underline">WHO</a></li>
+            <li><a href="https://www.imf.org" target="_blank" class="hover:underline">IMF</a></li>
+            <li><a href="https://www.usgs.gov" target="_blank" class="hover:underline">USGS</a></li>
+            <li><a href="https://www.nasa.gov" target="_blank" class="hover:underline">NASA</a></li>
+        </ul>
+    `;
+});
+
+
+        document.getElementById('descriptions').addEventListener('click', function() {
+            contentDiv.innerHTML = `
+                <h1 class="text-3xl font-bold">Descriptions</h1>
+                <p class="mt-4 text-lg">This section provides descriptions for each data source.</p>
+            `;
+        });
+
+        document.getElementById('favourites').addEventListener('click', function() {
+            contentDiv.innerHTML = `
+                <h1 class="text-3xl font-bold">Favourites</h1>
+                <p class="mt-4 text-lg">This section allows you to view your favourite data sources.</p>
+            `;
+        });
+        document.getElementById('about').addEventListener('click', function() {
+            contentDiv.innerHTML = `
+                <h1 class="text-3xl font-bold">About</h1>
+                <p class="mt-4 text-lg">About Time Travel Query Engine <br>
+Welcome to the Time Travel Query Engine — your portal to explore history like never before! Our platform lets you easily search and analyze historical data across different countries and categories. Just select a country, choose a date range, and discover detailed insights drawn from rich historical records. Prediction features are coming soon to make your experience even more powerful. Stay tuned!.</p>
+            `;
+        });
+
+        // Home Link Action
+        document.getElementById('homeLink').addEventListener('click', function() {
+         window.location.reload(true); 
+        });
+
+    </script>
+
+</body>
+</html>

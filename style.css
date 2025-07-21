@@ -1,0 +1,172 @@
+/* General Page Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f2f6fc;
+    margin: 0;
+    padding: 60px 20px 20px 20px;  /* Add padding top equal to the navbar height */
+    color: #333;
+}
+
+/* Navbar Styling */
+nav {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #333;
+    height: 60px; /* Set height of the navbar */
+}
+
+/* Additional Styling for Navbar Elements */
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    list-style-type: none;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+nav ul li a:hover {
+    background-color: #555; /* Darker background color on hover */
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #4a90e2;
+    margin-top: 0; /* Remove any top margin */
+    margin-bottom: 30px;
+}
+
+/* Filters (Dropdowns, Inputs, Buttons) */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.filters select,
+.filters input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background: #fff;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.filters select:focus,
+.filters input[type="date"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Search Button */
+#searchBtn {
+    background: #1b7ca5;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+#realTimeBtn {
+    background: #25a51b;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+#searchBtn:hover {
+    background: #059dc3;
+}
+#realTimeBtn:hover {
+    background: #04d964;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin-top: 20px; /* Space below navbar */
+}
+
+/* Canvas */
+canvas {
+    width: 100% !important;
+    height: 500px !important;
+}
+
+/* Event Display Box */
+#eventDisplay {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fffbf2;
+    border-left: 5px solid #f7c04a;
+    font-size: 16px;
+    border-radius: 8px;
+    display: none;
+}
+
+/* Prediction Display Box */
+
+/* Hidden Class */
+.hidden {
+    display: none; /* Hides the element */
+}
+
+/* Event Display Box - Make sure it’s styled when visible */
+#eventDisplay {
+    display: block; /* Ensure it's a block element when visible */
+    margin-top: 20px;
+    padding: 15px;
+    background: #e6f4f1;
+    border-left: 5px solid #2ecc71;
+    font-size: 16px;
+    border-radius: 8px;
+    /* Any other styles you want for the event display */
+}
+#predictionDisplay {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e6f4f1;
+    border-left: 5px solid #2ecc71;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        align-items: center;
+    }
+}
